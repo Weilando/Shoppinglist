@@ -11,13 +11,17 @@ class Shoppinglist extends React.Component {
 
   render() {
     const entries = [ 42, 'Cheese', 3 ];
-    const listItems = entries.map((entry) =>
-      <li>{entry}</li>
+    const keys = Array(entries.length);
+    for(let i=0; i<keys.length; i++) {
+      keys[i] = i;
+    }
+
+    const listItems = keys.map((tmpKey) =>
+      <li key={tmpKey.toString()}>
+        {entries[tmpKey]}
+      </li>
     );
 
-    //for(let i=0; i<entries.length; i++) {
-    //  console.log(i)
-    //}
     return (
       <div>
         <ul>
