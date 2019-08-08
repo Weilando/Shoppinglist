@@ -35,7 +35,6 @@ class Entry extends React.Component {
             onChange={this.handleChange}
             onBlur={this.handleSubmit}
           />
-          <input type='reset' value='Remove' name='reset' />
         </form>
       </li>
     );

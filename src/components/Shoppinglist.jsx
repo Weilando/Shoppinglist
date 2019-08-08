@@ -49,7 +49,6 @@ class Shoppinglist extends React.Component {
   }
 
   onChange(eId, value) {
-    console.log(eId, value);
     this.updateEntry(eId, value);
   }
 
