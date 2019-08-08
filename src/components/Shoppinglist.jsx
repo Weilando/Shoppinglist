@@ -22,11 +22,9 @@ class Shoppinglist extends React.Component {
     );
 
     return (
-      <div>
-        <ul>
-          {listItems}
-        </ul>
-      </div>
+      <ul>
+        {listItems}
+      </ul>
     );
   }
 }
