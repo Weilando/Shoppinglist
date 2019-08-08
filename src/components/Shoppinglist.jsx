@@ -25,15 +25,17 @@ class Shoppinglist extends React.Component {
   }
 
   deleteEntry(key) {
-    let { oldContents } = this.state;
-    const newContents = Array(oldContents.length-1);
+    let oldContents = this.state.contents;
+    let length = oldContents.length;
 
-    if(key >= oldContents.length) return null;
+    const newContents = Array(length-1);
+
+    if(key >= length) return null;
 
     for(let i=0; i<key; i++) {
       newContents[i] = oldContents[i];
     }
-    for(let i=key; i<oldContents.length-1; i++) {
+    for(let i=key; i<length-1; i++) {
       newContents[i] = oldContents[i+1];
     }
 
@@ -42,21 +44,20 @@ class Shoppinglist extends React.Component {
 
   updateEntry(key, content) {
     const newContents = this.state.contents.slice();
-
     newContents[key] = content;
-
     this.setState({contents: newContents});
   }
 
-  onChange(key, value) {
-    this.updateEntry(key, value);
+  onChange(eId, value) {
+    console.log(eId, value);
+    this.updateEntry(eId, value);
   }
 
-  onSubmit(key, value) {
+  onSubmit(eId, value) {
     if(value === '') {
-      this.deleteEntry(key);
+      this.deleteEntry(eId);
     } else {
-      this.updateEntry(key, value);
+      this.updateEntry(eId, value);
     }
   }
 
@@ -70,6 +71,7 @@ class Shoppinglist extends React.Component {
     let listItems = keys.map((tmpKey) =>
       <Entry
         key={tmpKey}
+        eId={Number(tmpKey)}
         eContent={String(contents[tmpKey])}
         onChange={this.onChange}
         onSubmit={this.onSubmit}
