@@ -2,19 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Entry extends React.Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    eContent: PropTypes.string.isRequired,
+  };
 
-    this.props = {
-      key: PropTypes.number.isRequired,
-      content: PropTypes.string.isRequired,
-    }
+  static defaultProps = {
+    eContent: 'Cheese...',
   };
 
   render() {
     return (
-      <li key={this.props.key}>
-        {this.props.content}
+      <li>
+        {this.props.eContent}
       </li>
     );
   }

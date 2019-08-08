@@ -6,19 +6,20 @@ class Shoppinglist extends React.Component {
     super(props);
 
     this.state = {
-      entries: Array(5).fill(null),
+      contents: [ 42, 'Cheese', 3, 'Bananas', 'Potatoes', 'Coke', 'Sparling Water' ],
+      //entries: Array(5).fill(null),
     };
   }
 
   render() {
-    const contents = [ 42, 'Cheese', 3 ];
+    const { contents } = this.state;
     const keys = Array(contents.length);
     for(let i=0; i<keys.length; i++) {
       keys[i] = i;
     }
 
     const listItems = keys.map((tmpKey) =>
-      <Entry key={tmpKey} content={contents[tmpKey]} />
+      <Entry key={tmpKey} eContent={String(contents[tmpKey])} />
     );
 
     return (
