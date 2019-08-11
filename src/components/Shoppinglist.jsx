@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Entry from './Entry';
+import NewEntry from './NewEntry';
 
 class Shoppinglist extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Shoppinglist extends React.Component {
       contents: this.props.contents,
     };
 
+    this.addEntry = this.addEntry.bind(this);
     this.updateEntry = this.updateEntry.bind(this);
     this.deleteEntry = this.deleteEntry.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -22,6 +24,12 @@ class Shoppinglist extends React.Component {
 
   static defaultProps = {
     contents: [ 42, 'Cheese', 3, 'Bananas', 'Potatoes', 'Coke', 'Sparling Water' ],
+  }
+
+  addEntry(content) {
+    const newContents = this.state.contents.slice();
+    newContents.push(content);
+    this.setState({contents: newContents});
   }
 
   deleteEntry(key) {
@@ -80,6 +88,10 @@ class Shoppinglist extends React.Component {
     return (
       <ul>
         {listItems}
+        <NewEntry
+          key="-1"
+          addEntry={this.addEntry}
+        />
       </ul>
     );
   }
