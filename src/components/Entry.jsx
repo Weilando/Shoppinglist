@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+let EntryMode = {
+  display: "DISPLAY",
+  edit: "EDIT",
+}
+
 class Entry extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +18,7 @@ class Entry extends React.Component {
   static propTypes = {
     eId: PropTypes.number.isRequired,
     eContent: PropTypes.string.isRequired,
+    mode: PropTypes.oneOf(['DISPLAY','EDIT']),
     onChange: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
   };
@@ -31,6 +37,14 @@ class Entry extends React.Component {
   }
 
   render() {
+    if(this.props.mode === EntryMode.display) {
+      return (
+        <li>
+          {this.props.eContent}
+        </li>
+      );
+    }
+
     return (
       <li>
         <form onSubmit={this.handleSubmit}>
@@ -51,4 +65,4 @@ class Entry extends React.Component {
   }
 }
 
-export default Entry;
+export { Entry, EntryMode };

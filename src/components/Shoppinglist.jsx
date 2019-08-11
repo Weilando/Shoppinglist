@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Entry from './Entry';
+import { Entry, EntryMode } from './Entry';
 import NewEntry from './NewEntry';
 
 class Shoppinglist extends React.Component {
@@ -9,8 +9,10 @@ class Shoppinglist extends React.Component {
 
     this.state = {
       contents: this.props.contents,
+      mode: EntryMode.display,
     };
 
+    this.toggleMode = this.toggleMode.bind(this);
     this.addEntry = this.addEntry.bind(this);
     this.updateEntry = this.updateEntry.bind(this);
     this.deleteEntry = this.deleteEntry.bind(this);
@@ -24,6 +26,17 @@ class Shoppinglist extends React.Component {
 
   static defaultProps = {
     contents: [ 'Sparkling Water', 'Bananas', 'Cheese' ],
+  }
+
+  toggleMode() {
+    switch (this.state.mode) {
+      case EntryMode.display:
+        this.setState({mode: EntryMode.edit});
+        break;
+      case EntryMode.edit:
+      default:
+        this.setState({mode: EntryMode.display});
+    }
   }
 
   addEntry(content) {
@@ -68,20 +81,33 @@ class Shoppinglist extends React.Component {
         key={tmpKey}
         eId={Number(tmpKey)}
         eContent={String(contents[tmpKey])}
+        mode = {this.state.mode}
         onChange={this.onChange}
         onSubmit={this.onSubmit}
       />
     );
 
     return (
-      <ul>
-        {entryList}
-        
-        <NewEntry
-          key="-1"
-          addEntry={this.addEntry}
-        />
-      </ul>
+      <div>
+        <form>
+          <label htmlFor="modeButton">Switch to mode: </label>
+          <input
+            type="button"
+            id="modeButton"
+            value={this.state.mode === EntryMode.display ? "Edit" : "Display"}
+            onClick={this.toggleMode}
+          />
+        </form>
+
+        <ul>
+          {entryList}
+
+          <NewEntry
+            key="-1"
+            addEntry={this.addEntry}
+          />
+        </ul>
+      </div>
     );
   }
 }
