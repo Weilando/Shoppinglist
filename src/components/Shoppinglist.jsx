@@ -33,20 +33,8 @@ class Shoppinglist extends React.Component {
   }
 
   deleteEntry(key) {
-    let oldContents = this.state.contents;
-    let length = oldContents.length;
-
-    const newContents = Array(length-1);
-
-    if(key >= length) return null;
-
-    for(let i=0; i<key; i++) {
-      newContents[i] = oldContents[i];
-    }
-    for(let i=key; i<length-1; i++) {
-      newContents[i] = oldContents[i+1];
-    }
-
+    let newContents = this.state.contents.slice();
+    newContents.splice(key, 1);
     this.setState({contents: newContents});
   }
 

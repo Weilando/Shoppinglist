@@ -7,6 +7,7 @@ class Entry extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   static propTypes = {
@@ -25,6 +26,10 @@ class Entry extends React.Component {
     this.props.onSubmit(this.props.eId, event.target.value);
   }
 
+  handleRemove() {
+    this.props.onSubmit(this.props.eId, '');
+  }
+
   render() {
     return (
       <li>
@@ -34,6 +39,11 @@ class Entry extends React.Component {
             value={this.props.eContent}
             onChange={this.handleChange}
             onBlur={this.handleSubmit}
+          />
+          <input
+            type="button"
+            value="Remove"
+            onClick={this.handleRemove}
           />
         </form>
       </li>
