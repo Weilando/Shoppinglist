@@ -39,6 +39,7 @@ class NewEntry extends React.Component {
           <input
             type="submit"
             value="Add"
+            disabled={this.state.content === ''}
           />
         </form>
       </li>
