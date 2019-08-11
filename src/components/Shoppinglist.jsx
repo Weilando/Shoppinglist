@@ -23,7 +23,7 @@ class Shoppinglist extends React.Component {
   }
 
   static defaultProps = {
-    contents: [ 42, 'Cheese', 3, 'Bananas', 'Potatoes', 'Coke', 'Sparling Water' ],
+    contents: [ 'Sparkling Water', 'Bananas', 'Cheese' ],
   }
 
   addEntry(content) {
@@ -33,7 +33,7 @@ class Shoppinglist extends React.Component {
   }
 
   deleteEntry(key) {
-    let newContents = this.state.contents.slice();
+    const newContents = this.state.contents.slice();
     newContents.splice(key, 1);
     this.setState({contents: newContents});
   }
@@ -63,7 +63,7 @@ class Shoppinglist extends React.Component {
       keys[i] = i;
     }
 
-    let listItems = keys.map((tmpKey) =>
+    let entryList = keys.map((tmpKey) =>
       <Entry
         key={tmpKey}
         eId={Number(tmpKey)}
@@ -75,7 +75,8 @@ class Shoppinglist extends React.Component {
 
     return (
       <ul>
-        {listItems}
+        {entryList}
+        
         <NewEntry
           key="-1"
           addEntry={this.addEntry}
