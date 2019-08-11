@@ -29,7 +29,7 @@ class Entry extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(this.props.eId, event.target.value);
+    this.props.onSubmit(this.props.eId, this.props.eContent);
   }
 
   handleRemove() {
