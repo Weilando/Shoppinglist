@@ -9,7 +9,7 @@ class Shoppinglist extends React.Component {
 
     this.state = {
       contents: this.props.contents,
-      mode: EntryMode.display,
+      mode: EntryMode.DISPLAY,
     };
 
     this.toggleMode = this.toggleMode.bind(this);
@@ -30,12 +30,12 @@ class Shoppinglist extends React.Component {
 
   toggleMode() {
     switch (this.state.mode) {
-      case EntryMode.display:
-        this.setState({mode: EntryMode.edit});
+      case EntryMode.DISPLAY:
+        this.setState({mode: EntryMode.EDIT});
         break;
-      case EntryMode.edit:
+      case EntryMode.EDIT:
       default:
-        this.setState({mode: EntryMode.display});
+        this.setState({mode: EntryMode.DISPLAY});
     }
   }
 
@@ -94,7 +94,7 @@ class Shoppinglist extends React.Component {
           <input
             type="button"
             id="modeButton"
-            value={this.state.mode === EntryMode.display ? "Edit" : "Display"}
+            value={this.state.mode === EntryMode.DISPLAY ? "Edit" : "Display"}
             onClick={this.toggleMode}
           />
         </form>

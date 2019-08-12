@@ -20,6 +20,11 @@ ul {
 li {
   background-color: lightblue;
   margin: 0.1em;
+  padding: 0.1em;
+}
+
+li.done {
+  text-decoration: line-through;
 }
 
 input[type="text"] {

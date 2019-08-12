@@ -2,14 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 let EntryMode = {
-  display: "DISPLAY",
-  edit: "EDIT",
+  DISPLAY: "DISPLAY",
+  EDIT: "EDIT",
+}
+
+let EntryStatus = {
+  OPEN: "OPEN",
+  DONE: "DONE",
 }
 
 class Entry extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      status: EntryStatus.OPEN,
+    };
+
+    this.toggleStatus = this.toggleStatus.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
@@ -22,6 +32,17 @@ class Entry extends React.Component {
     onChange: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
   };
+
+  toggleStatus() {
+    switch (this.state.status) {
+      case EntryStatus.OPEN:
+        this.setState({status: EntryStatus.DONE});
+        break;
+      case EntryStatus.DONE:
+      default:
+        this.setState({status: EntryStatus.OPEN});
+    }
+  }
 
   handleChange(event) {
     this.props.onChange(this.props.eId, event.target.value);
@@ -37,9 +58,12 @@ class Entry extends React.Component {
   }
 
   render() {
-    if(this.props.mode === EntryMode.display) {
+    if(this.props.mode === EntryMode.DISPLAY) {
       return (
-        <li>
+        <li
+          onClick={this.toggleStatus}
+          class={this.state.status === EntryStatus.DONE ? 'done' : ''}
+        >
           {this.props.eContent}
         </li>
       );
