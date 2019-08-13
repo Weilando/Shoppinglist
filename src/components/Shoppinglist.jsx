@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Entry, EntryMode } from './Entry';
 import NewEntry from './NewEntry';
+import InfoBox from './InfoBox';
 
 class Shoppinglist extends React.Component {
   constructor(props) {
@@ -108,6 +109,11 @@ class Shoppinglist extends React.Component {
             addEntry={this.addEntry}
           />
         </ul>
+
+        <InfoBox
+          entryCount={contents.length}
+          //doneEntryCount={}
+        />
       </div>
     );
   }
