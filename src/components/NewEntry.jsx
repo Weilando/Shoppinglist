@@ -33,11 +33,13 @@ class NewEntry extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
+            class="entry"
             value={this.state.content}
             onChange={this.handleChange}
           />
           <input
             type="submit"
+            class="entry"
             value="Add"
             disabled={this.state.content === ''}
           />

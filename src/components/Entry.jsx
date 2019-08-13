@@ -74,12 +74,14 @@ class Entry extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
+            class="entry"
             value={this.props.eContent}
             onChange={this.handleChange}
             onBlur={this.handleSubmit}
           />
           <input
             type="button"
+            class="entry"
             value="Remove"
             onClick={this.handleRemove}
           />

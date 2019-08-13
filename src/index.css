@@ -12,22 +12,45 @@ code {
     monospace;
 }
 
-ul {
+div.Shoppinglist {
+  width: 60%;
+  min-width: 30em;
+  max-width: 60em;
+  margin: auto;
+  padding: 0.4em;
+  border: 0.1em solid black;
+}
+
+ul.Shoppinglist {
   list-style-type: none;
   text-align: left;
+  padding: 0;
+  margin: 0;
 }
 
 li {
   background-color: lightblue;
-  margin: 0.1em;
-  padding: 0.1em;
+  margin: 0.2em;
+  padding: 0.2em;
 }
 
 li.done {
+  background-color: lightgreen;
   text-decoration: line-through;
 }
 
-input[type="text"] {
+input[type="text"].entry {
   background-color: transparent;
-  border: none
+  width: 82%;
+  border: none;
+}
+
+input[type="button"].entry {
+  float: right;
+  margin-right: 0;
+}
+
+input[type="submit"].entry {
+  float: right;
+  margin-right: 0;
 }

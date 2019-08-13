@@ -88,18 +88,19 @@ class Shoppinglist extends React.Component {
     );
 
     return (
-      <div>
+      <div class="Shoppinglist">
         <form>
           <label htmlFor="modeButton">Switch to mode: </label>
           <input
             type="button"
             id="modeButton"
+            class="entry"
             value={this.state.mode === EntryMode.DISPLAY ? "Edit" : "Display"}
             onClick={this.toggleMode}
           />
         </form>
 
-        <ul>
+        <ul class="Shoppinglist">
           {entryList}
 
           <NewEntry
