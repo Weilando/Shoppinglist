@@ -5,6 +5,7 @@ I want to build a simple shoppinglist, using React (and maybe Redux).
 Of course there are several similar projects all over the place, but I simply want to practise.
 The project should not be seen as a prototype etc..
 
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
