@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { addEntry } from '../redux/actions'
 
 class NewEntry extends React.Component {
   constructor(props) {
@@ -13,9 +15,9 @@ class NewEntry extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  static propTypes = {
+  /*static propTypes = {
     addEntry: PropTypes.func.isRequired,
-  }
+  }*/
 
   handleChange(event) {
     this.setState({content: event.target.value});

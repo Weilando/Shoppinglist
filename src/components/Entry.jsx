@@ -6,7 +6,7 @@ let EntryMode = {
   EDIT: "EDIT",
 }
 
-let EntryStatus = {
+export let EntryStatus = {
   OPEN: "OPEN",
   DONE: "DONE",
 }
