@@ -2,61 +2,61 @@ import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from "../actionT
 import { EntryStatus } from '../../components/Entry';
 
 const initialState = {
-  ids: [],
-  contents: []
+  entries: [],
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case ADD_ENTRY:
+    case ADD_ENTRY: {
       const { id, content } = action.payload;
       return {
         ...state,
-        ids: [...state.ids, id],
-        contents: {
-          ...state.contents,
-          [id]: {
-            content,
-            status: EntryStatus.OPEN
-          }
-        }
+        entries: state.entries.concat({
+          id: id,
+          content: content,
+          status: EntryStatus.OPEN,
+        })
       };
-    case UPDATE_ENTRY:
+    }
+    break;
+    case UPDATE_ENTRY: {
+      const { id, content } = action.payload;
       return {
         ...state,
-        ids: [...state.ids, id],
-        contents: {
-          ...state.contents,
-          [id]: {
-            content,
-            status: EntryStatus.OPEN
+        entries: {
+          ...entries.slice()[id]: {
+            content = content
           }
         }
       };
-    case DELETE_ENTRY:
+    }
+    case DELETE_ENTRY: {
+      const { id, content } = action.payload;
       return {
         ...state,
-        ids: [...state.ids, id],
-        contents: {
-          ...state.contents,
+        allIds: [...state.allIds, id],
+        byIds: {
+          ...state.byIds,
           [id]: {
             content,
             status: EntryStatus.OPEN
           }
         }
       };
+    }
     case TOGGLE_STATUS: { // TODO: toggle needs to be implemented
-        return {
-          ...state,
-          contents: {
-            ...state.contents,
-            [id]: {
-              ...state.contents[id],
-              status: EntryStatus.DONE
-            }
+      const { id } = action.payload;
+      return {
+        ...state,
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            ...state.byIds[id],
+            status: EntryStatus.DONE
           }
-        };
-      }
+        }
+      };
+    }
     default:
       return state;
   }
