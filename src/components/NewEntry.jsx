@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
-import { addEntry } from '../redux/actions'
+import { connect } from 'react-redux';
+import { addEntry } from '../redux/actions';
 
-class CNewEntry extends React.Component {
+class NewEntry extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,7 +26,7 @@ class CNewEntry extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const content = this.state.content;
-    this.props.addEntry({ content });
+    this.props.addEntry(content);
     this.setState({content: ''});
   }
 
@@ -36,13 +36,13 @@ class CNewEntry extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            class="entry"
+            className="entry"
             value={this.state.content}
             onChange={this.handleChange}
           />
           <input
             type="submit"
-            class="entry"
+            className="entry"
             value="Add"
             disabled={this.state.content === ''}
           />
@@ -53,9 +53,7 @@ class CNewEntry extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addEntry: (payload) =>
-    dispatch({ type: 'ADD_ENTRY', payload }),
+  addEntry: (content) => dispatch(addEntry(content)),
 });
 
-const NewEntry = connect(null, mapDispatchToProps)(CNewEntry);
-export default NewEntry;
+export default connect(null, mapDispatchToProps)(NewEntry);

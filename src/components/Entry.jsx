@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { deleteEntry } from '../redux/actions';
 
-let EntryMode = {
+export let EntryMode = {
   DISPLAY: "DISPLAY",
   EDIT: "EDIT",
 }
@@ -22,16 +24,13 @@ class Entry extends React.Component {
     this.toggleStatus = this.toggleStatus.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
   }
 
   static propTypes = {
     eId: PropTypes.number.isRequired,
     eContent: PropTypes.string.isRequired,
     mode: PropTypes.oneOf(['DISPLAY','EDIT']),
-    onChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-  };
+  }
 
   toggleStatus() {
     switch (this.state.status) {
@@ -45,16 +44,12 @@ class Entry extends React.Component {
   }
 
   handleChange(event) {
-    this.props.onChange(this.props.eId, event.target.value);
+
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(this.props.eId, this.props.eContent);
-  }
 
-  handleRemove() {
-    this.props.onSubmit(this.props.eId, '');
   }
 
   render() {
@@ -62,7 +57,7 @@ class Entry extends React.Component {
       return (
         <li
           onClick={this.toggleStatus}
-          class={this.state.status === EntryStatus.DONE ? 'done' : ''}
+          className={this.state.status === EntryStatus.DONE ? 'done' : ''}
         >
           {this.props.eContent}
         </li>
@@ -74,16 +69,16 @@ class Entry extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            class="entry"
+            className="entry"
             value={this.props.eContent}
             onChange={this.handleChange}
             onBlur={this.handleSubmit}
           />
           <input
             type="button"
-            class="entry"
+            className="entry"
             value="Remove"
-            onClick={this.handleRemove}
+            onClick={this.props.deleteEntry(this.props.eId)}
           />
         </form>
       </li>
@@ -91,4 +86,9 @@ class Entry extends React.Component {
   }
 }
 
-export { Entry, EntryMode };
+const mapDispatchToProps = dispatch => ({
+  deleteEntry: (id) => dispatch(deleteEntry(id)),
+});
+
+const ConnectedEntry = connect(null, mapDispatchToProps)(Entry);
+export { ConnectedEntry as Entry };
