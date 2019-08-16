@@ -2,7 +2,7 @@ import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from "../actionT
 import { EntryStatus } from '../../components/Entry';
 
 const initialState = {
-  entries: [],
+  entryList: [],
 };
 
 export default function(state = initialState, action) {
@@ -11,37 +11,32 @@ export default function(state = initialState, action) {
       const { id, content } = action.payload;
       return {
         ...state,
-        entries: state.entries.concat({
+        entryList: state.entryList.concat({
           id: id,
           content: content,
           status: EntryStatus.OPEN,
         })
       };
     }
-    break;
     case UPDATE_ENTRY: {
       const { id, content } = action.payload;
       return {
         ...state,
-        entries: {
-          ...entries.slice()[id]: {
-            content = content
+        entryList: {
+          ...state.entryList,
+          [id]: {
+            ...state.entryList[id],
+            content: content
           }
         }
       };
     }
     case DELETE_ENTRY: {
-      const { id, content } = action.payload;
+      console.log('DELETE_ENTRY');
+      const { id } = action.payload;
+      const newEntryList = state.entryList.slice();
       return {
-        ...state,
-        allIds: [...state.allIds, id],
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            content,
-            status: EntryStatus.OPEN
-          }
-        }
+        entryList: newEntryList.splice(id, 1),
       };
     }
     case TOGGLE_STATUS: { // TODO: toggle needs to be implemented

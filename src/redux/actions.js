@@ -25,7 +25,7 @@ export function updateEntry(id, content) {
 export function deleteEntry(id) {
   return {
     type: DELETE_ENTRY,
-    payload: { id }
+    payload: { id: id }
   }
 }
 

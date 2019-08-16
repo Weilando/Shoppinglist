@@ -1,7 +1,7 @@
-import entry from './entry';
+import general from './general';
 import { combineReducers } from 'redux';
 
 // rootReducer
 export default combineReducers({
-    entry
+    general
 });
