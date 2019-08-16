@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import { Entry, EntryMode, EntryStatus} from './Entry';
+import { Entry, EntryMode} from './Entry';
 import NewEntry from './NewEntry';
 
 class Shoppinglist extends React.Component {
@@ -35,7 +35,8 @@ class Shoppinglist extends React.Component {
   }
 
   render() {
-    const keys = Array(this.props.entries.length);
+    const entries = this.props.entries.slice();
+    const keys = Array(entries.length);
     for(let i=0; i<keys.length; i++) {
       keys[i] = i;
     }
@@ -43,8 +44,8 @@ class Shoppinglist extends React.Component {
     let entryList = keys.map((tmpKey) =>
       <Entry
         key={tmpKey}
-        eId={Number(tmpKey)}
-        eContent={String(this.props.entries[tmpKey].content)}
+        eId={Number(entries[tmpKey].id)}
+        eContent={String(entries[tmpKey].content)}
         mode = {this.state.mode}
       />
     );

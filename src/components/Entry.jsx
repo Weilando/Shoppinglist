@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteEntry } from '../redux/actions';
+import { deleteEntry, updateEntry, toggleStatus } from '../redux/actions';
 
 export let EntryMode = {
   DISPLAY: "DISPLAY",
@@ -22,6 +22,7 @@ class Entry extends React.Component {
     };
 
     this.toggleStatus = this.toggleStatus.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -43,6 +44,10 @@ class Entry extends React.Component {
     }
   }
 
+  handleDelete(event) {
+    this.props.deleteEntry(this.props.eId);
+  }
+
   handleChange(event) {
 
   }
@@ -56,7 +61,7 @@ class Entry extends React.Component {
     if(this.props.mode === EntryMode.DISPLAY) {
       return (
         <li
-          onClick={this.toggleStatus}
+          onClick={this.props.toggleStatus}
           className={this.state.status === EntryStatus.DONE ? 'done' : ''}
         >
           {this.props.eContent}
@@ -78,7 +83,7 @@ class Entry extends React.Component {
             type="button"
             className="entry"
             value="Remove"
-            onClick={this.props.deleteEntry(this.props.eId)}
+            onClick={this.handleDelete}
           />
         </form>
       </li>
@@ -87,7 +92,9 @@ class Entry extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
+  updateEntry: (id, content) => dispatch(updateEntry(id, content)),
   deleteEntry: (id) => dispatch(deleteEntry(id)),
+  toggleStatus: (id) => dispatch(toggleStatus(id)),
 });
 
 const ConnectedEntry = connect(null, mapDispatchToProps)(Entry);

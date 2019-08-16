@@ -32,22 +32,34 @@ export default function(state = initialState, action) {
       };
     }
     case DELETE_ENTRY: {
-      console.log('DELETE_ENTRY');
       const { id } = action.payload;
-      const newEntryList = state.entryList.slice();
-      return {
-        entryList: newEntryList.splice(id, 1),
-      };
+      return Object.assign({}, state, {
+        entryList: [...state.entryList.filter(entry => entry.id !== id)],
+      });
     }
-    case TOGGLE_STATUS: { // TODO: toggle needs to be implemented
+    case TOGGLE_STATUS: {
       const { id } = action.payload;
+      const currentEntry = state.entryList.slice(id, id+1);
+      const currentStatus = currentEntry.status;
+      if(currentStatus === EntryStatus.OPEN) {
+        return {
+          ...state,
+          entryList: {
+            ...state.entryList,
+            [id]: {
+              ...state.entryList[id],
+              status: EntryStatus.DONE
+            }
+          }
+        };
+      }
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
+        entryList: {
+          ...state.entryList,
           [id]: {
-            ...state.byIds[id],
-            status: EntryStatus.DONE
+            ...state.entryList[id],
+            status: EntryStatus.OPEN
           }
         }
       };

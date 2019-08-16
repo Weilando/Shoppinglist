@@ -32,6 +32,6 @@ export function deleteEntry(id) {
 export function toggleStatus(id) {
   return{
     type: TOGGLE_STATUS,
-    id
+    payload: { id: id }
   }
 }
