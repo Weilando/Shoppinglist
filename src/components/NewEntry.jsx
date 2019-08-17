@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addEntry } from '../redux/actions';
 
 class NewEntry extends React.Component {
   constructor(props) {
@@ -23,7 +25,8 @@ class NewEntry extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addEntry(this.state.content);
+    const content = this.state.content;
+    this.props.addEntry(content);
     this.setState({content: ''});
   }
 
@@ -33,13 +36,13 @@ class NewEntry extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            class="entry"
+            className="entry"
             value={this.state.content}
             onChange={this.handleChange}
           />
           <input
             type="submit"
-            class="entry"
+            className="entry"
             value="Add"
             disabled={this.state.content === ''}
           />
@@ -49,4 +52,8 @@ class NewEntry extends React.Component {
   }
 }
 
-export default NewEntry;
+const mapDispatchToProps = dispatch => ({
+  addEntry: (content) => dispatch(addEntry(content)),
+});
+
+export default connect(null, mapDispatchToProps)(NewEntry);

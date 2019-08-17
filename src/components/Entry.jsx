@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { deleteEntry, updateEntry, toggleStatus } from '../redux/actions';
 
-let EntryMode = {
+export let EntryMode = {
   DISPLAY: "DISPLAY",
   EDIT: "EDIT",
 }
 
-let EntryStatus = {
+export let EntryStatus = {
   OPEN: "OPEN",
   DONE: "DONE",
 }
@@ -15,54 +17,43 @@ class Entry extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      status: EntryStatus.OPEN,
-    };
-
-    this.toggleStatus = this.toggleStatus.bind(this);
+    this.handleToggleStatus = this.handleToggleStatus.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
   }
 
   static propTypes = {
     eId: PropTypes.number.isRequired,
     eContent: PropTypes.string.isRequired,
+    status: PropTypes.oneOf(['OPEN', 'DONE']),
     mode: PropTypes.oneOf(['DISPLAY','EDIT']),
-    onChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-  };
+  }
 
-  toggleStatus() {
-    switch (this.state.status) {
-      case EntryStatus.OPEN:
-        this.setState({status: EntryStatus.DONE});
-        break;
-      case EntryStatus.DONE:
-      default:
-        this.setState({status: EntryStatus.OPEN});
-    }
+  handleToggleStatus() {
+    console.log('handleToggleStatus');
+    this.props.toggleStatus(this.props.eId);
+  }
+
+  handleDelete(event) {
+    this.props.deleteEntry(this.props.eId);
   }
 
   handleChange(event) {
-    this.props.onChange(this.props.eId, event.target.value);
+    this.props.updateEntry(this.props.eId, event.target.value);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(this.props.eId, this.props.eContent);
-  }
-
-  handleRemove() {
-    this.props.onSubmit(this.props.eId, '');
+    this.props.updateEntry(this.props.eId, this.props.eContent);
   }
 
   render() {
     if(this.props.mode === EntryMode.DISPLAY) {
       return (
         <li
-          onClick={this.toggleStatus}
-          class={this.state.status === EntryStatus.DONE ? 'done' : ''}
+          onClick={this.handleToggleStatus}
+          className={this.props.status === EntryStatus.DONE ? 'done' : ''}
         >
           {this.props.eContent}
         </li>
@@ -74,16 +65,16 @@ class Entry extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            class="entry"
+            className="entry"
             value={this.props.eContent}
             onChange={this.handleChange}
             onBlur={this.handleSubmit}
           />
           <input
             type="button"
-            class="entry"
+            className="entry"
             value="Remove"
-            onClick={this.handleRemove}
+            onClick={this.handleDelete}
           />
         </form>
       </li>
@@ -91,4 +82,11 @@ class Entry extends React.Component {
   }
 }
 
-export { Entry, EntryMode };
+const mapDispatchToProps = dispatch => ({
+  updateEntry: (id, content) => dispatch(updateEntry(id, content)),
+  deleteEntry: (id) => dispatch(deleteEntry(id)),
+  toggleStatus: (id) => dispatch(toggleStatus(id)),
+});
+
+const ConnectedEntry = connect(null, mapDispatchToProps)(Entry);
+export { ConnectedEntry as Entry };

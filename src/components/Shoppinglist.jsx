@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Entry, EntryMode } from './Entry';
+import { connect } from "react-redux";
+import { Entry, EntryMode} from './Entry';
 import NewEntry from './NewEntry';
 import InfoBox from './InfoBox';
 
@@ -9,24 +10,18 @@ class Shoppinglist extends React.Component {
     super(props);
 
     this.state = {
-      contents: this.props.contents,
       mode: EntryMode.DISPLAY,
     };
 
     this.toggleMode = this.toggleMode.bind(this);
-    this.addEntry = this.addEntry.bind(this);
-    this.updateEntry = this.updateEntry.bind(this);
-    this.deleteEntry = this.deleteEntry.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   static propTypes = {
-    contents: PropTypes.array,
+    entries: PropTypes.array,
   }
 
   static defaultProps = {
-    contents: [ 'Sparkling Water', 'Bananas', 'Cheese' ],
+    entries: [],
   }
 
   toggleMode() {
@@ -40,73 +35,38 @@ class Shoppinglist extends React.Component {
     }
   }
 
-  addEntry(content) {
-    const newContents = this.state.contents.slice();
-    newContents.push(content);
-    this.setState({contents: newContents});
-  }
-
-  deleteEntry(key) {
-    const newContents = this.state.contents.slice();
-    newContents.splice(key, 1);
-    this.setState({contents: newContents});
-  }
-
-  updateEntry(key, content) {
-    const newContents = this.state.contents.slice();
-    newContents[key] = content;
-    this.setState({contents: newContents});
-  }
-
-  onChange(eId, value) {
-    this.updateEntry(eId, value);
-  }
-
-  onSubmit(eId, value) {
-    if(value === '') {
-      this.deleteEntry(eId);
-    } else {
-      this.updateEntry(eId, value);
-    }
-  }
-
   render() {
-    const { contents } = this.state;
-    const keys = Array(contents.length);
-    for(let i=0; i<keys.length; i++) {
-      keys[i] = i;
-    }
+    const entries = this.props.entries;
+    const keys = [...Array(entries.length).keys()]; // Array with keys from 0 to entries.length
 
     let entryList = keys.map((tmpKey) =>
       <Entry
-        key={tmpKey}
-        eId={Number(tmpKey)}
-        eContent={String(contents[tmpKey])}
+        key = {tmpKey}
+        eId = {Number(entries[tmpKey].id)}
+        eContent = {String(entries[tmpKey].content)}
+        status = {String(entries[tmpKey].status)}
         mode = {this.state.mode}
-        onChange={this.onChange}
-        onSubmit={this.onSubmit}
       />
     );
 
     return (
-      <div class="Shoppinglist">
+      <div className="Shoppinglist">
         <form>
           <label htmlFor="modeButton">Switch to mode: </label>
           <input
             type="button"
             id="modeButton"
-            class="entry"
+            className="entry"
             value={this.state.mode === EntryMode.DISPLAY ? "Edit" : "Display"}
             onClick={this.toggleMode}
           />
         </form>
 
-        <ul class="Shoppinglist">
+        <ul className="Shoppinglist">
           {entryList}
 
           <NewEntry
             key="-1"
-            addEntry={this.addEntry}
           />
         </ul>
 
@@ -119,4 +79,10 @@ class Shoppinglist extends React.Component {
   }
 }
 
-export default Shoppinglist;
+const mapStateToProps = state => {
+  return {
+    entries: state.general.entryList,
+  }
+}
+
+export default connect(mapStateToProps)(Shoppinglist);
