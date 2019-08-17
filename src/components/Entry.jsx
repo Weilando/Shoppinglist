@@ -49,12 +49,12 @@ class Entry extends React.Component {
   }
 
   handleChange(event) {
-
+    this.props.updateEntry(this.props.eId, event.target.value);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-
+    this.props.updateEntry(this.props.eId, this.props.eContent);
   }
 
   render() {

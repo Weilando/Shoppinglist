@@ -19,16 +19,22 @@ export default function(state = initialState, action) {
       };
     }
     case UPDATE_ENTRY: {
-      const { id, content } = action.payload;
+      const id = action.payload.id;
+      const newContent = action.payload.content;
+
       return {
         ...state,
-        entryList: {
-          ...state.entryList,
-          [id]: {
-            ...state.entryList[id],
-            content: content
+        entryList: state.entryList.map((item, index) => {
+          // Find the item with the matching id
+          if(item.id === id) {
+            // Return a new object
+            return {
+              ...item,  // copy the existing item
+              content: newContent  // replace the content
+            };
           }
-        }
+          return item; // Leave every other item unchanged
+        })
       };
     }
     case DELETE_ENTRY: {

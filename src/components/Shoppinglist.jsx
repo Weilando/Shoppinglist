@@ -35,7 +35,7 @@ class Shoppinglist extends React.Component {
   }
 
   render() {
-    const entries = this.props.entries.slice();
+    const entries = this.props.entries;
     const keys = [...Array(entries.length).keys()]; // Array with keys from 0 to entries.length
 
     let entryList = keys.map((tmpKey) =>
