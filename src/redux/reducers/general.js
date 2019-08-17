@@ -44,30 +44,26 @@ export default function(state = initialState, action) {
       });
     }
     case TOGGLE_STATUS: {
+      console.log('Jop.');
       const { id } = action.payload;
-      const currentEntry = state.entryList.slice(id, id+1);
-      const currentStatus = currentEntry.status;
-      if(currentStatus === EntryStatus.OPEN) {
-        return {
-          ...state,
-          entryList: {
-            ...state.entryList,
-            [id]: {
-              ...state.entryList[id],
-              status: EntryStatus.DONE
-            }
-          }
-        };
-      }
       return {
         ...state,
-        entryList: {
-          ...state.entryList,
-          [id]: {
-            ...state.entryList[id],
-            status: EntryStatus.OPEN
+        entryList: state.entryList.map((item, index) => {
+          if(item.id === id) {
+            console.log(id + ' gefunden.');
+            if(item.status === EntryStatus.OPEN) {
+              return {
+                ...item,
+                status: EntryStatus.DONE
+              };
+            }
+            return {
+              ...item,
+              status: EntryStatus.OPEN
+            };
           }
-        }
+          return item;
+        })
       };
     }
     default:

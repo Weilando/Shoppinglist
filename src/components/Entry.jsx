@@ -17,11 +17,7 @@ class Entry extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      status: EntryStatus.OPEN,
-    };
-
-    this.toggleStatus = this.toggleStatus.bind(this);
+    this.handleToggleStatus = this.handleToggleStatus.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,18 +26,13 @@ class Entry extends React.Component {
   static propTypes = {
     eId: PropTypes.number.isRequired,
     eContent: PropTypes.string.isRequired,
+    status: PropTypes.oneOf(['OPEN', 'DONE']),
     mode: PropTypes.oneOf(['DISPLAY','EDIT']),
   }
 
-  toggleStatus() {
-    switch (this.state.status) {
-      case EntryStatus.OPEN:
-        this.setState({status: EntryStatus.DONE});
-        break;
-      case EntryStatus.DONE:
-      default:
-        this.setState({status: EntryStatus.OPEN});
-    }
+  handleToggleStatus() {
+    console.log('handleToggleStatus');
+    this.props.toggleStatus(this.props.eId);
   }
 
   handleDelete(event) {
@@ -61,8 +52,8 @@ class Entry extends React.Component {
     if(this.props.mode === EntryMode.DISPLAY) {
       return (
         <li
-          onClick={this.props.toggleStatus}
-          className={this.state.status === EntryStatus.DONE ? 'done' : ''}
+          onClick={this.handleToggleStatus}
+          className={this.props.status === EntryStatus.DONE ? 'done' : ''}
         >
           {this.props.eContent}
         </li>

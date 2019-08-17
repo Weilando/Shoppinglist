@@ -40,9 +40,10 @@ class Shoppinglist extends React.Component {
 
     let entryList = keys.map((tmpKey) =>
       <Entry
-        key={tmpKey}
-        eId={Number(entries[tmpKey].id)}
-        eContent={String(entries[tmpKey].content)}
+        key = {tmpKey}
+        eId = {Number(entries[tmpKey].id)}
+        eContent = {String(entries[tmpKey].content)}
+        status = {String(entries[tmpKey].status)}
         mode = {this.state.mode}
       />
     );
