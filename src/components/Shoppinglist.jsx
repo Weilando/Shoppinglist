@@ -71,7 +71,7 @@ class Shoppinglist extends React.Component {
         </ul>
 
         <InfoBox
-          entryCount={contents.length}
+          entryCount={this.props.entries.length}
           //doneEntryCount={}
         />
       </div>
