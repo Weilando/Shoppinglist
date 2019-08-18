@@ -38,7 +38,6 @@ class Shoppinglist extends React.Component {
 
   countDone() {
     const doneEntries = this.props.entries.filter(entry => entry.status === EntryStatus.DONE);
-    console.log(doneEntries.length);
     return Number(doneEntries.length);
   }
 

@@ -1,4 +1,4 @@
-import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from "./actionTypes";
+import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from './actionTypes';
 
 let nextEntryId = 0;
 
@@ -30,7 +30,7 @@ export function deleteEntry(id) {
 }
 
 export function toggleStatus(id) {
-  return{
+  return {
     type: TOGGLE_STATUS,
     payload: { id: id }
   }

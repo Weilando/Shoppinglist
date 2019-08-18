@@ -1,4 +1,4 @@
-import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from "../actionTypes";
+import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from '../actionTypes';
 import { EntryStatus } from '../../components/Entry';
 
 const initialState = {
@@ -44,13 +44,11 @@ export default function(state = initialState, action) {
       });
     }
     case TOGGLE_STATUS: {
-      console.log('Jop.');
       const { id } = action.payload;
       return {
         ...state,
         entryList: state.entryList.map((item, index) => {
           if(item.id === id) {
-            console.log(id + ' gefunden.');
             if(item.status === EntryStatus.OPEN) {
               return {
                 ...item,

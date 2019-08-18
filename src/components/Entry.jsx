@@ -31,7 +31,6 @@ class Entry extends React.Component {
   }
 
   handleToggleStatus() {
-    console.log('handleToggleStatus');
     this.props.toggleStatus(this.props.eId);
   }
 
