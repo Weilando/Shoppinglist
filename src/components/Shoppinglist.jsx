@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import { Entry, EntryMode} from './Entry';
+import { Entry, EntryMode, EntryStatus } from './Entry';
 import NewEntry from './NewEntry';
 import InfoBox from './InfoBox';
 
@@ -14,6 +14,7 @@ class Shoppinglist extends React.Component {
     };
 
     this.toggleMode = this.toggleMode.bind(this);
+    this.countDone = this.countDone.bind(this);
   }
 
   static propTypes = {
@@ -33,6 +34,12 @@ class Shoppinglist extends React.Component {
       default:
         this.setState({mode: EntryMode.DISPLAY});
     }
+  }
+
+  countDone() {
+    const doneEntries = this.props.entries.filter(entry => entry.status === EntryStatus.DONE);
+    console.log(doneEntries.length);
+    return Number(doneEntries.length);
   }
 
   render() {
@@ -72,7 +79,7 @@ class Shoppinglist extends React.Component {
 
         <InfoBox
           entryCount={this.props.entries.length}
-          //doneEntryCount={}
+          doneEntryCount={this.countDone()}
         />
       </div>
     );
