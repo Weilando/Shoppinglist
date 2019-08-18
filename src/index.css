@@ -21,6 +21,15 @@ div.Shoppinglist {
   border: 0.1em solid black;
 }
 
+div.InfoBox {
+  width: 50%;
+  min-width: 30em;
+  max-width: 60em;
+  margin: auto;
+  padding: 0.1em;
+  border: 0.1em solid grey;
+}
+
 ul.Shoppinglist {
   list-style-type: none;
   text-align: left;
@@ -34,9 +43,13 @@ li {
   padding: 0.2em;
 }
 
-li.done {
+li.doneCross {
   background-color: lightgreen;
   text-decoration: line-through;
+}
+
+li.done {
+  background-color: lightgreen;
 }
 
 input[type="text"].entry {

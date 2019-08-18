@@ -52,7 +52,7 @@ class Entry extends React.Component {
       return (
         <li
           onClick={this.handleToggleStatus}
-          className={this.props.status === EntryStatus.DONE ? 'done' : ''}
+          className={this.props.status === EntryStatus.DONE ? 'doneCross' : ''}
         >
           {this.props.eContent}
         </li>
@@ -60,7 +60,7 @@ class Entry extends React.Component {
     }
 
     return (
-      <li>
+      <li className={this.props.status === EntryStatus.DONE ? 'done' : ''}>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"

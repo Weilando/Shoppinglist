@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function InfoBox(props) {
   return (
-    <div className="Shoppinglist">
+    <div className="InfoBox">
       <p>Entries: {props.entryCount} &emsp; Done entries: {props.doneEntryCount}</p>
     </div>
   );
