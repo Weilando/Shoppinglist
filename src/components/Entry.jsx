@@ -2,16 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteEntry, updateEntry, toggleStatus } from '../redux/actions';
-
-export let EntryMode = {
-  DISPLAY: "DISPLAY",
-  EDIT: "EDIT",
-}
-
-export let EntryStatus = {
-  OPEN: "OPEN",
-  DONE: "DONE",
-}
+import { EntryMode, EntryStatus } from '../enums/entry';
 
 class Entry extends React.Component {
   constructor(props) {
@@ -87,5 +78,4 @@ const mapDispatchToProps = dispatch => ({
   toggleStatus: (id) => dispatch(toggleStatus(id)),
 });
 
-const ConnectedEntry = connect(null, mapDispatchToProps)(Entry);
-export { ConnectedEntry as Entry };
+export default connect(null, mapDispatchToProps)(Entry);

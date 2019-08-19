@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import { Entry, EntryMode, EntryStatus } from './Entry';
+import Entry from './Entry';
 import NewEntry from './NewEntry';
 import InfoBox from './InfoBox';
+import { EntryMode, EntryStatus } from '../enums/entry';
 
 class Shoppinglist extends React.Component {
   constructor(props) {
