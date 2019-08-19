@@ -25,8 +25,7 @@ class NewEntry extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const content = this.state.content;
-    this.props.addEntry(content);
+    this.props.addEntry(this.state.content);
     this.setState({content: ''});
   }
 

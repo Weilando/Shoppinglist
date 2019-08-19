@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Entry from './Entry';
 import NewEntry from './NewEntry';
 import InfoBox from './InfoBox';
+import ModeForm from './ModeForm';
 import { EntryMode, EntryStatus } from '../enums/entry';
 
 class Shoppinglist extends React.Component {
@@ -16,6 +17,7 @@ class Shoppinglist extends React.Component {
 
     this.toggleMode = this.toggleMode.bind(this);
     this.countDone = this.countDone.bind(this);
+    this.getEntryList = this.getEntryList.bind(this);
   }
 
   static propTypes = {
@@ -42,11 +44,11 @@ class Shoppinglist extends React.Component {
     return Number(doneEntries.length);
   }
 
-  render() {
+  getEntryList() {
     const entries = this.props.entries;
     const keys = [...Array(entries.length).keys()]; // Array with keys from 0 to entries.length
 
-    let entryList = keys.map((tmpKey) =>
+    return keys.map((tmpKey) =>
       <Entry
         key = {tmpKey}
         eId = {Number(entries[tmpKey].id)}
@@ -55,19 +57,17 @@ class Shoppinglist extends React.Component {
         mode = {this.state.mode}
       />
     );
+  }
+
+  render() {
+    let entryList = this.getEntryList();
 
     return (
       <div className="Shoppinglist">
-        <form>
-          <label htmlFor="modeButton">Switch to mode: </label>
-          <input
-            type="button"
-            id="modeButton"
-            className="entry"
-            value={this.state.mode === EntryMode.DISPLAY ? "Edit" : "Display"}
-            onClick={this.toggleMode}
-          />
-        </form>
+        <ModeForm
+          mode={this.state.mode}
+          onClick={this.toggleMode}
+        />
 
         <ul className="Shoppinglist">
           {entryList}
