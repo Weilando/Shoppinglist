@@ -35,6 +35,11 @@ class Entry extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
+    if(this.props.eContent === '') {
+      this.props.deleteEntry(this.props.eId);
+    }
+
     this.props.updateEntry(this.props.eId, this.props.eContent);
   }
 
