@@ -2,22 +2,22 @@ import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from './actionTy
 
 let nextEntryId = 0;
 
-export function addEntry(content) {
+export function addEntry(newContent) {
   return {
     type: ADD_ENTRY,
     payload: {
       id: ++nextEntryId,
-      content
+      newContent
     }
   }
 }
 
-export function updateEntry(id, content) {
+export function updateEntry(id, newContent) {
   return {
     type: UPDATE_ENTRY,
     payload: {
       id: id,
-      content
+      newContent
     }
   }
 }

@@ -8,43 +8,43 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_ENTRY: {
-      const { id, content } = action.payload;
+      const { id, newContent } = action.payload;
+
       return {
         ...state,
         entryList: state.entryList.concat({
           id: id,
-          content: content,
+          content: newContent,
           status: EntryStatus.OPEN,
         })
       };
     }
     case UPDATE_ENTRY: {
-      const id = action.payload.id;
-      const newContent = action.payload.content;
+      const { id, newContent } = action.payload;
 
       return {
         ...state,
         entryList: state.entryList.map((item, index) => {
-          // Find the item with the matching id
-          if(item.id === id) {
-            // Return a new object
-            return {
-              ...item,  // copy the existing item
-              content: newContent  // replace the content
+          if(item.id === id) { // find item with mathing id
+            return {    // return a new object
+              ...item,  // copy the existing item...
+              content: newContent  // ... and replace its content
             };
           }
-          return item; // Leave every other item unchanged
+          return item; // leave every other item unchanged
         })
       };
     }
     case DELETE_ENTRY: {
       const { id } = action.payload;
+      
       return Object.assign({}, state, {
         entryList: [...state.entryList.filter(entry => entry.id !== id)],
       });
     }
-    case TOGGLE_STATUS: {
+    case TOGGLE_STATUS: { // works like UPDATE_ENTRY, but checks the entry's current status before change
       const { id } = action.payload;
+
       return {
         ...state,
         entryList: state.entryList.map((item, index) => {
@@ -60,7 +60,7 @@ export default function(state = initialState, action) {
               status: EntryStatus.OPEN
             };
           }
-          return item;
+          return item; // leave every other item unchanged
         })
       };
     }
