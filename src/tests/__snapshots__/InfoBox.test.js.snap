@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests for InfoBox component should render InfoBox component correctly 1`] = `
+<div
+  className="InfoBox"
+>
+  <p>
+    Entries: 
+    42
+       Done entries: 
+    7
+  </p>
+</div>
+`;

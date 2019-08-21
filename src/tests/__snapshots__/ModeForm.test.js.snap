@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests for ModeForm component should render ModeForm component with mode DISPLAY correctly 1`] = `
+<form>
+  <label
+    htmlFor="modeButton"
+  >
+    Switch to mode: 
+  </label>
+  <input
+    className="entry"
+    id="modeButton"
+    onClick={[MockFunction]}
+    type="button"
+    value="Edit"
+  />
+</form>
+`;
+
+exports[`snapshot tests for ModeForm component should render ModeForm component with mode EDIT correctly 1`] = `
+<form>
+  <label
+    htmlFor="modeButton"
+  >
+    Switch to mode: 
+  </label>
+  <input
+    className="entry"
+    id="modeButton"
+    onClick={[MockFunction]}
+    type="button"
+    value="Display"
+  />
+</form>
+`;

@@ -13,7 +13,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:watch": "npm test -- --watch",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -32,6 +31,7 @@
     ]
   },
   "devDependencies": {
-    "babel-jest": "^24.7.1"
+    "babel-jest": "^24.7.1",
+    "react-test-renderer": "^16.9.0"
   }
 }

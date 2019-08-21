@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests for NewEntry component should render NewEntry component correctly 1`] = `
+<li>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      className="entry"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <input
+      className="entry"
+      disabled={true}
+      type="submit"
+      value="Add"
+    />
+  </form>
+</li>
+`;

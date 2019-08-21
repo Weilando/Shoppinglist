@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests for Shoppinglist component should render empty Shoppinglist component correctly 1`] = `
+<div
+  className="Shoppinglist"
+>
+  <form>
+    <label
+      htmlFor="modeButton"
+    >
+      Switch to mode: 
+    </label>
+    <input
+      className="entry"
+      id="modeButton"
+      onClick={[Function]}
+      type="button"
+      value="Edit"
+    />
+  </form>
+  <ul
+    className="Shoppinglist"
+  >
+    <li>
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          className="entry"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+        <input
+          className="entry"
+          disabled={true}
+          type="submit"
+          value="Add"
+        />
+      </form>
+    </li>
+  </ul>
+  <div
+    className="InfoBox"
+  >
+    <p>
+      Entries: 
+      0
+         Done entries: 
+      0
+    </p>
+  </div>
+</div>
+`;

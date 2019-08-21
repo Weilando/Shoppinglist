@@ -1,7 +1,9 @@
 # Shoppinglist
 
 This project helps me to refresh and improve my React skills.
-I want to build a simple shoppinglist, using React and Redux.
+I want to build a simple shopping list, using React and Redux.
+Jest is used to perform snapshot tests on React components and to test Redux actions and reducers.
+
 Of course there are several similar projects all over the place, but I simply want to practise.
 The project should not be seen as a prototype etc.!
 

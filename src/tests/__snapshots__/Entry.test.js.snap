@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests for Entry component should render Entry component with DONE status and EDIT mode correctly 1`] = `
+<li
+  className="done"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      className="entry"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="text"
+      value="Bananas"
+    />
+    <input
+      className="entry"
+      onClick={[Function]}
+      type="button"
+      value="Remove"
+    />
+  </form>
+</li>
+`;
+
+exports[`snapshot tests for Entry component should render Entry component with OPEN status and DISPLAY mode correctly 1`] = `
+<li
+  className=""
+  onClick={[Function]}
+>
+  Bananas
+</li>
+`;
