@@ -72,9 +72,7 @@ class Shoppinglist extends React.Component {
         <ul className="Shoppinglist">
           {entryList}
 
-          <NewEntry
-            key="-1"
-          />
+          <NewEntry key="-1"/>
         </ul>
 
         <InfoBox
