@@ -1,7 +1,7 @@
-import reducer from '../redux/reducers/general';
-import * as actions from '../redux/actions';
-import * as types from '../redux/actionTypes';
-import { EntryStatus } from '../enums/entry';
+import reducer from '../../redux/reducers/general';
+import * as actions from '../../redux/actions';
+import * as types from '../../redux/actionTypes';
+import { EntryStatus } from '../../enums/entry';
 
 describe('general reducer', () => {
   let initialState = { entryList: [], };

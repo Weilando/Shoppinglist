@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import store from '../redux/store';
-import ModeForm from '../components/ModeForm';
-import { EntryMode } from '../enums/entry';
+import store from '../../redux/store';
+import ModeForm from '../../components/ModeForm';
+import { EntryMode } from '../../enums/entry';
 
 describe('snapshot tests for ModeForm component', () => {
   it('should render ModeForm component with mode DISPLAY correctly', () => {

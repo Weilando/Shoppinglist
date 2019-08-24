@@ -1,5 +1,5 @@
-import * as actions from '../redux/actions.js';
-import * as types from '../redux/actionTypes';
+import * as actions from '../../redux/actions.js';
+import * as types from '../../redux/actionTypes';
 
 describe('actions', () => {
   it('should create an action to add an entry', () => {
