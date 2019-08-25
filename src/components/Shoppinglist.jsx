@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Entry from './Entry';
 import NewEntry from './NewEntry';
 import InfoBox from './InfoBox';
+import MealSuggestionsBox from './MealSuggestionsBox';
 import ModeForm from './ModeForm';
 import { EntryMode, EntryStatus } from '../enums/entry';
 
@@ -79,6 +80,8 @@ class Shoppinglist extends React.Component {
           entryCount={this.props.entries.length}
           doneEntryCount={this.countDone()}
         />
+
+        <MealSuggestionsBox />
       </div>
     );
   }
