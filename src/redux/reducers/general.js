@@ -1,9 +1,6 @@
 import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from '../actionTypes';
 import { EntryStatus } from '../../enums/entry';
-
-const initialState = {
-  entryList: [],
-};
+import { initialState } from './index';
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -37,7 +34,7 @@ export default function(state = initialState, action) {
     }
     case DELETE_ENTRY: {
       const { id } = action.payload;
-      
+
       return Object.assign({}, state, {
         entryList: [...state.entryList.filter(entry => entry.id !== id)],
       });

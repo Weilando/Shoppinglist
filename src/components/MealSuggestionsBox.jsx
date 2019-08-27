@@ -1,30 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 import MealSuggestion from './MealSuggestion';
-import { getMealSuggestionsForMainIngredient } from '../axios/MealService';
 
 class MealSuggestionsBox extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      meals: [],
-    }
-  }
-
-  async componentDidMount() {
-    const meals = await getMealSuggestionsForMainIngredient('chicken_breast');
-    this.setState({meals: meals});
   }
 
   getMealSuggestionList() {
-    const meals = this.state.meals;
-    const keys = [...Array(meals.length).keys()]; // Array with keys from 0 to entries.length
+    const suggestions = this.props.suggestions;
+    const keys = [...Array(suggestions.length).keys()]; // Array with keys from 0 to entries.length
 
     return keys.map((tmpKey) =>
       <MealSuggestion
         key = {tmpKey}
-        mealId = {Number(meals[tmpKey].idMeal)}
-        mealName = {String(meals[tmpKey].strMeal)}
+        mealId = {Number(suggestions[tmpKey].idMeal)}
+        mealName = {String(suggestions[tmpKey].strMeal)}
       />
     );
   }
@@ -43,4 +35,10 @@ class MealSuggestionsBox extends React.Component {
   }
 }
 
-export default MealSuggestionsBox;
+const mapStateToProps = state => {
+  return {
+    suggestions: state.mealSuggestions.mealSuggestionList,
+  }
+}
+
+export default connect(mapStateToProps)(MealSuggestionsBox);

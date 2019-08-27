@@ -4,7 +4,7 @@ import * as types from '../../redux/actionTypes';
 import { EntryStatus } from '../../enums/entry';
 
 describe('general reducer', () => {
-  let initialState = { entryList: [], };
+  let initialState = { entryList: [], mealSuggestionList: [] };
   let oneEntryState = {
     entryList: [
       {
@@ -12,7 +12,8 @@ describe('general reducer', () => {
         content: 'Some content',
         status: EntryStatus.OPEN,
       }
-    ]
+    ],
+    mealSuggestionList: []
   }
 
   it('should return the initial state', () => {
@@ -40,7 +41,8 @@ describe('general reducer', () => {
           content: 'Another content',
           status: EntryStatus.OPEN,
         }
-      ]
+      ],
+      mealSuggestionList: []
     });
   });
 
@@ -58,7 +60,8 @@ describe('general reducer', () => {
             content: 'Another content',
             status: EntryStatus.OPEN,
           }
-        ]
+        ],
+        mealSuggestionList: []
       } , actions.updateEntry(2, 'Changed content'))
     ).toEqual({
       entryList: [
@@ -72,7 +75,8 @@ describe('general reducer', () => {
           content: 'Changed content',
           status: EntryStatus.OPEN,
         }
-      ]
+      ],
+      mealSuggestionList: []
     });
   });
 
@@ -85,7 +89,7 @@ describe('general reducer', () => {
   it('should handle DELETE_ENTRY on state with single entry', () => {
     expect(
       reducer(oneEntryState , actions.deleteEntry(1))
-    ).toEqual({entryList: []});
+    ).toEqual({entryList: [], mealSuggestionList: []});
   });
 
   it('should handle DELETE_ENTRY on state with three entries', () => {
@@ -107,7 +111,8 @@ describe('general reducer', () => {
             content: 'Content, too',
             status: EntryStatus.OPEN,
           }
-        ]
+        ],
+        mealSuggestionList: []
       } , actions.deleteEntry(2))
     ).toEqual({
       entryList: [
@@ -121,7 +126,8 @@ describe('general reducer', () => {
           content: 'Content, too',
           status: EntryStatus.OPEN,
         }
-      ]
+      ],
+      mealSuggestionList: []
     });
   });
 
@@ -141,7 +147,8 @@ describe('general reducer', () => {
           content: 'Some content',
           status: EntryStatus.DONE,
         }
-      ]
+      ],
+      mealSuggestionList: []
     });
   });
 
@@ -159,7 +166,8 @@ describe('general reducer', () => {
             content: 'Another content',
             status: EntryStatus.DONE,
           }
-        ]
+        ],
+        mealSuggestionList: []
       } , actions.toggleStatus(2))
     ).toEqual({
       entryList: [
@@ -173,7 +181,8 @@ describe('general reducer', () => {
           content: 'Another content',
           status: EntryStatus.OPEN,
         }
-      ]
+      ],
+      mealSuggestionList: []
     });
   });
 })
