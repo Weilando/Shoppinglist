@@ -5,7 +5,7 @@ import { HTML_MEAL } from '../axios/urlConstants';
 function MealSuggestion(props) {
   return (
     <li>
-      <a href={`${HTML_MEAL}${props.mealId}`} target="_blank">
+      <a href={`${HTML_MEAL}${props.mealId}`} target="_blank" rel="noopener noreferrer">
         {props.mealName}
       </a>
     </li>
