@@ -1,10 +1,11 @@
-import reducer from '../../redux/reducers/general';
+import { generalReducer } from '../../redux/reducers/generalReducer';
+import { mealSuggestionsReducer } from '../../redux/reducers/mealSuggestionsReducer';
 import * as actions from '../../redux/actions';
 import * as types from '../../redux/actionTypes';
 import { EntryStatus } from '../../enums/entry';
 
-describe('general reducer', () => {
-  let initialState = { entryList: [], mealSuggestionList: [] };
+describe('generalReducer', () => {
+  let initialState = { entryList: [] };
   let oneEntryState = {
     entryList: [
       {
@@ -12,23 +13,22 @@ describe('general reducer', () => {
         content: 'Some content',
         status: EntryStatus.OPEN,
       }
-    ],
-    mealSuggestionList: []
-  }
+    ]
+  };
 
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(initialState);
+    expect(generalReducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle ADD_ENTRY for initial state', () => {
     expect(
-      reducer(initialState, actions.addEntry('Some content'))
+      generalReducer(initialState, actions.addEntry('Some content'))
     ).toEqual(oneEntryState);
   });
 
   it('should handle ADD_ENTRY', () => {
     expect(
-      reducer(oneEntryState , actions.addEntry('Another content'))
+      generalReducer(oneEntryState , actions.addEntry('Another content'))
     ).toEqual({
       entryList: [
         {
@@ -41,14 +41,13 @@ describe('general reducer', () => {
           content: 'Another content',
           status: EntryStatus.OPEN,
         }
-      ],
-      mealSuggestionList: []
+      ]
     });
   });
 
   it('should handle UPDATE_ENTRY on state with two entries', () => {
     expect(
-      reducer({
+      generalReducer({
         entryList: [
           {
             id: 1,
@@ -60,8 +59,7 @@ describe('general reducer', () => {
             content: 'Another content',
             status: EntryStatus.OPEN,
           }
-        ],
-        mealSuggestionList: []
+        ]
       } , actions.updateEntry(2, 'Changed content'))
     ).toEqual({
       entryList: [
@@ -75,26 +73,25 @@ describe('general reducer', () => {
           content: 'Changed content',
           status: EntryStatus.OPEN,
         }
-      ],
-      mealSuggestionList: []
+      ]
     });
   });
 
   it('should handle DELETE_ENTRY on initial state (deleting anything)', () => {
     expect(
-      reducer(initialState, actions.deleteEntry(42))
+      generalReducer(initialState, actions.deleteEntry(42))
     ).toEqual(initialState);
   });
 
   it('should handle DELETE_ENTRY on state with single entry', () => {
     expect(
-      reducer(oneEntryState , actions.deleteEntry(1))
-    ).toEqual({entryList: [], mealSuggestionList: []});
+      generalReducer(oneEntryState , actions.deleteEntry(1))
+    ).toEqual(initialState);
   });
 
   it('should handle DELETE_ENTRY on state with three entries', () => {
     expect(
-      reducer({
+      generalReducer({
         entryList: [
           {
             id: 1,
@@ -111,8 +108,7 @@ describe('general reducer', () => {
             content: 'Content, too',
             status: EntryStatus.OPEN,
           }
-        ],
-        mealSuggestionList: []
+        ]
       } , actions.deleteEntry(2))
     ).toEqual({
       entryList: [
@@ -126,20 +122,19 @@ describe('general reducer', () => {
           content: 'Content, too',
           status: EntryStatus.OPEN,
         }
-      ],
-      mealSuggestionList: []
+      ]
     });
   });
 
   it('should handle TOGGLE_STATUS on initial state (change anything)', () => {
     expect(
-      reducer(initialState, actions.toggleStatus(42))
+      generalReducer(initialState, actions.toggleStatus(42))
     ).toEqual(initialState);
   });
 
   it('should handle TOGGLE_STATUS on state with one entry (change OPEN to DONE)', () => {
     expect(
-      reducer(oneEntryState, actions.toggleStatus(1))
+      generalReducer(oneEntryState, actions.toggleStatus(1))
     ).toEqual({
       entryList: [
         {
@@ -147,14 +142,13 @@ describe('general reducer', () => {
           content: 'Some content',
           status: EntryStatus.DONE,
         }
-      ],
-      mealSuggestionList: []
+      ]
     });
   });
 
   it('should handle TOGGLE_STATUS on state with two entries (change DONE to OPEN)', () => {
     expect(
-      reducer({
+      generalReducer({
         entryList: [
           {
             id: 1,
@@ -166,8 +160,7 @@ describe('general reducer', () => {
             content: 'Another content',
             status: EntryStatus.DONE,
           }
-        ],
-        mealSuggestionList: []
+        ]
       } , actions.toggleStatus(2))
     ).toEqual({
       entryList: [
@@ -181,8 +174,36 @@ describe('general reducer', () => {
           content: 'Another content',
           status: EntryStatus.OPEN,
         }
-      ],
-      mealSuggestionList: []
+      ]
     });
   });
-})
+});
+
+describe('mealSuggestionsReducer', () => {
+  let initialState = { mealSuggestionList: [] };
+  let oneEntryState = {
+    mealSuggestionList: [
+      {
+        "strMeal": "Chicken Couscous",
+        "strMealThumb": "https://www.themealdb.com/images/media/meals/qxytrx1511304021.jpg",
+        "idMeal": "52850"
+      }
+    ]
+  };
+
+  it('should return the initial state', () => {
+    expect(mealSuggestionsReducer(undefined, [])).toEqual(initialState);
+  });
+
+  it('should add new meal suggestions to empty state', () => {
+    expect(mealSuggestionsReducer(initialState, actions.updateMealSuggestions(
+      [
+        {
+          "strMeal": "Chicken Couscous",
+          "strMealThumb": "https://www.themealdb.com/images/media/meals/qxytrx1511304021.jpg",
+          "idMeal": "52850"
+        }
+      ]
+    ))).toEqual(oneEntryState);
+  });
+});

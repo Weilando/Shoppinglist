@@ -4,8 +4,12 @@ import { connect } from "react-redux";
 import MealSuggestion from './MealSuggestion';
 
 class MealSuggestionsBox extends React.Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    suggestions: PropTypes.array,
+  }
+
+  static defaultProps = {
+    suggestions: [],
   }
 
   getMealSuggestionList() {

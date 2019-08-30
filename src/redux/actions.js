@@ -36,9 +36,9 @@ export function toggleStatus(id) {
   }
 }
 
-export function updateMealSuggestions(ingredient) {
+export function updateMealSuggestions(mealSuggestions) {
   return {
     type: UPDATE_MEAL_SUGGESTIONS,
-    payload: { ingredient: ingredient }
+    payload: { newMealSuggestions: mealSuggestions }
   }
 }

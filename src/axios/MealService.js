@@ -1,7 +1,9 @@
 import { MealAPI } from './MealAPI';
 import { FILTER } from './urlConstants';
+import store from '../redux/store';
+import { updateMealSuggestions } from '../redux/actions';
 
-export async function getMealSuggestionsForMainIngredient(mainIngredient) {
+export async function getMealSuggestionsFor(mainIngredient) {
   try {
     const { data } = await MealAPI.get(FILTER, {params: {i: mainIngredient}})
     const { meals } = data;
@@ -16,4 +18,10 @@ export async function getMealSuggestionsForMainIngredient(mainIngredient) {
   }
 
   return [];
+}
+
+export async function addMealSuggestionsFor(mainIngredient) {
+  const mealSuggestions = await getMealSuggestionsFor(mainIngredient);
+  console.log(mealSuggestions);
+  store.dispatch(updateMealSuggestions({newMealSuggestions : mealSuggestions}));
 }

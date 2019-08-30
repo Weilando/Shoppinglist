@@ -1,5 +1,5 @@
 import mockAxios from 'axios';
-import { getMealSuggestionsForMainIngredient } from "../../axios/MealService";
+import { getMealSuggestionsFor } from "../../axios/MealService";
 import { FILTER } from '../../axios/urlConstants';
 
 const spaghettiResponse = {
@@ -26,7 +26,7 @@ describe("meal service", () => {
   });
 
   it("request meals for main ingredient 'stone' should return no meal", async () => {
-    const result = await getMealSuggestionsForMainIngredient("stone");
+    const result = await getMealSuggestionsFor("stone");
 
     expect(result).toEqual([]);
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
@@ -38,7 +38,7 @@ describe("meal service", () => {
       Promise.resolve(spaghettiResponse)
     );
 
-    const result = await getMealSuggestionsForMainIngredient("spaghetti");
+    const result = await getMealSuggestionsFor("spaghetti");
 
     expect(result).toEqual(spaghettiResponse.data.meals);
     expect(mockAxios.get).toHaveBeenCalledTimes(1);

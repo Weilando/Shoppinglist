@@ -81,7 +81,7 @@ class Shoppinglist extends React.Component {
           doneEntryCount={this.countDone()}
         />
 
-        // <MealSuggestionsBox />
+        <MealSuggestionsBox />
       </div>
     );
   }

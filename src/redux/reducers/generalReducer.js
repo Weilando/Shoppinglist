@@ -1,8 +1,11 @@
 import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from '../actionTypes';
 import { EntryStatus } from '../../enums/entry';
-import { initialState } from './index';
 
-export default function(state = initialState, action) {
+const initialState = {
+  entryList: [],
+};
+
+export function generalReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_ENTRY: {
       const { id, newContent } = action.payload;
