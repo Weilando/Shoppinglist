@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteEntry, updateEntry, toggleStatus } from '../redux/actions';
-import { addMealSuggestionsFor } from '../axios/MealService';
-import { EntryMode, EntryStatus } from '../enums/entry';
+import { deleteEntry, updateEntry, toggleStatus } from '../store/actions';
+import { addMealSuggestionsFor } from '../services/MealService';
+import { EntryMode, EntryStatus } from '../constants/entry';
 
 class Entry extends React.Component {
   constructor(props) {

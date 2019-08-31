@@ -2,7 +2,7 @@
 // I use the test API key "1", because this project is for educational use only.
 
 import axios from "axios";
-import { BASEURL } from './urlConstants';
+import { BASEURL } from '../constants/urlConstants';
 
 export const MealAPI = axios.create({
   baseURL: BASEURL,

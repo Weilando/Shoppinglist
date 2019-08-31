@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EntryMode } from '../enums/entry';
+import { EntryMode } from '../constants/entry';
 
 function ModeForm(props) {
   return (

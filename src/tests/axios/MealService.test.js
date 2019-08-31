@@ -1,6 +1,6 @@
 import mockAxios from 'axios';
-import { getMealSuggestionsFor, formatName } from "../../axios/MealService";
-import { FILTER } from '../../axios/urlConstants';
+import { getMealSuggestionsFor, formatName } from "../../services/MealService";
+import { FILTER } from '../../constants/urlConstants';
 
 const spaghettiResponse = {
   data: {

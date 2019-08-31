@@ -1,8 +1,8 @@
-import { generalReducer } from '../../redux/reducers/generalReducer';
-import { mealSuggestionsReducer } from '../../redux/reducers/mealSuggestionsReducer';
-import * as actions from '../../redux/actions';
-import * as types from '../../redux/actionTypes';
-import { EntryStatus } from '../../enums/entry';
+import { generalReducer } from '../../store/reducers/generalReducer';
+import { mealSuggestionsReducer } from '../../store/reducers/mealSuggestionsReducer';
+import * as actions from '../../store/actions';
+import * as types from '../../store/actionTypes';
+import { EntryStatus } from '../../constants/entry';
 
 describe('generalReducer', () => {
   const initialState = { entryList: [] };

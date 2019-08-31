@@ -1,5 +1,5 @@
-import * as actions from '../../redux/actions.js';
-import * as types from '../../redux/actionTypes';
+import * as actions from '../../store/actions.js';
+import * as types from '../../store/actionTypes';
 
 describe('actions for generalReducer', () => {
   it('should create an action to add an entry', () => {

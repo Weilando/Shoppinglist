@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HTML_MEAL } from '../axios/urlConstants';
+import { HTML_MEAL } from '../constants/urlConstants';
 
 function MealSuggestion(props) {
   return (

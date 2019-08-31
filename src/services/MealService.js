@@ -1,7 +1,7 @@
 import { MealAPI } from './MealAPI';
-import { FILTER } from './urlConstants';
-import store from '../redux/store';
-import { updateMealSuggestions } from '../redux/actions';
+import { FILTER } from '../constants/urlConstants';
+import store from '../store/store';
+import { updateMealSuggestions } from '../store/actions';
 
 // helper function is exported for tests
 export async function getMealSuggestionsFor(mainIngredient) {
