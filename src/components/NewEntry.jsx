@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addEntry } from '../redux/actions';
+import { addMealSuggestionsFor } from '../axios/MealService';
 
 class NewEntry extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class NewEntry extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.addEntry(this.state.content);
+    addMealSuggestionsFor(this.state.content);
     this.setState({content: ''});
   }
 

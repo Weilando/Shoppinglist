@@ -1,11 +1,12 @@
-import reducer from '../../redux/reducers/general';
+import { generalReducer } from '../../redux/reducers/generalReducer';
+import { mealSuggestionsReducer } from '../../redux/reducers/mealSuggestionsReducer';
 import * as actions from '../../redux/actions';
 import * as types from '../../redux/actionTypes';
 import { EntryStatus } from '../../enums/entry';
 
-describe('general reducer', () => {
-  let initialState = { entryList: [], };
-  let oneEntryState = {
+describe('generalReducer', () => {
+  const initialState = { entryList: [] };
+  const oneEntryState = {
     entryList: [
       {
         id: 1,
@@ -13,21 +14,21 @@ describe('general reducer', () => {
         status: EntryStatus.OPEN,
       }
     ]
-  }
+  };
 
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(initialState);
+    expect(generalReducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle ADD_ENTRY for initial state', () => {
     expect(
-      reducer(initialState, actions.addEntry('Some content'))
+      generalReducer(initialState, actions.addEntry('Some content'))
     ).toEqual(oneEntryState);
   });
 
   it('should handle ADD_ENTRY', () => {
     expect(
-      reducer(oneEntryState , actions.addEntry('Another content'))
+      generalReducer(oneEntryState , actions.addEntry('Another content'))
     ).toEqual({
       entryList: [
         {
@@ -46,7 +47,7 @@ describe('general reducer', () => {
 
   it('should handle UPDATE_ENTRY on state with two entries', () => {
     expect(
-      reducer({
+      generalReducer({
         entryList: [
           {
             id: 1,
@@ -78,19 +79,19 @@ describe('general reducer', () => {
 
   it('should handle DELETE_ENTRY on initial state (deleting anything)', () => {
     expect(
-      reducer(initialState, actions.deleteEntry(42))
+      generalReducer(initialState, actions.deleteEntry(42))
     ).toEqual(initialState);
   });
 
   it('should handle DELETE_ENTRY on state with single entry', () => {
     expect(
-      reducer(oneEntryState , actions.deleteEntry(1))
-    ).toEqual({entryList: []});
+      generalReducer(oneEntryState , actions.deleteEntry(1))
+    ).toEqual(initialState);
   });
 
   it('should handle DELETE_ENTRY on state with three entries', () => {
     expect(
-      reducer({
+      generalReducer({
         entryList: [
           {
             id: 1,
@@ -127,13 +128,13 @@ describe('general reducer', () => {
 
   it('should handle TOGGLE_STATUS on initial state (change anything)', () => {
     expect(
-      reducer(initialState, actions.toggleStatus(42))
+      generalReducer(initialState, actions.toggleStatus(42))
     ).toEqual(initialState);
   });
 
   it('should handle TOGGLE_STATUS on state with one entry (change OPEN to DONE)', () => {
     expect(
-      reducer(oneEntryState, actions.toggleStatus(1))
+      generalReducer(oneEntryState, actions.toggleStatus(1))
     ).toEqual({
       entryList: [
         {
@@ -147,7 +148,7 @@ describe('general reducer', () => {
 
   it('should handle TOGGLE_STATUS on state with two entries (change DONE to OPEN)', () => {
     expect(
-      reducer({
+      generalReducer({
         entryList: [
           {
             id: 1,
@@ -176,4 +177,65 @@ describe('general reducer', () => {
       ]
     });
   });
-})
+});
+
+describe('mealSuggestionsReducer', () => {
+  const initialState = { mealSuggestionList: [] };
+  const chickenSuggestion = {
+    "strMeal": "Chicken Couscous",
+    "strMealThumb": "https://www.themealdb.com/images/media/meals/qxytrx1511304021.jpg",
+    "idMeal": "52850"
+  };
+  const spaghettiList = [
+    {
+      "strMeal": "Pilchard puttanesca",
+      "strMealThumb": "https://www.themealdb.com/images/media/meals/vvtvtr1511180578.jpg",
+      "idMeal": "52837"
+    },
+    {
+      "strMeal": "Spaghetti Bolognese",
+      "strMealThumb": "https://www.themealdb.com/images/media/meals/sutysw1468247559.jpg",
+      "idMeal": "52770"
+    }
+  ];
+  const oneEntryState = {
+    mealSuggestionList: [ chickenSuggestion ]
+  };
+
+  it('should return the initial state', () => {
+    expect(mealSuggestionsReducer(undefined, [])).toEqual(initialState);
+  });
+
+  it('should add a new meal suggestion to empty state', () => {
+    expect(mealSuggestionsReducer(initialState,
+      actions.updateMealSuggestions([chickenSuggestion])))
+    .toEqual(oneEntryState);
+  });
+
+  it('should add two new meal suggetions in front of existing suggestions', () => {
+    expect(mealSuggestionsReducer(oneEntryState,
+      actions.updateMealSuggestions(spaghettiList)))
+    .toEqual({ mealSuggestionList: [...spaghettiList].concat(chickenSuggestion) });
+  });
+
+  it('should add a new meal suggetion on front of existing suggestions and limit the amount to ten', () => {
+    const result = mealSuggestionsReducer({
+      mealSuggestionList: spaghettiList
+        .concat(spaghettiList)
+        .concat(spaghettiList)
+        .concat(spaghettiList)
+        .concat(spaghettiList)
+    }, actions.updateMealSuggestions([chickenSuggestion]));
+
+    expect(result.mealSuggestionList.length).toEqual(10);
+    expect(result)
+    .toEqual({ mealSuggestionList: [
+      chickenSuggestion,
+      ...spaghettiList,
+      ...spaghettiList,
+      ...spaghettiList,
+      ...spaghettiList,
+      spaghettiList[0]
+    ]});
+  });
+});

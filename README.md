@@ -1,20 +1,31 @@
 # Shoppinglist
 
 This project helps me to refresh and improve my React skills.
-I want to build a simple shopping list, using React and Redux.
-Jest is used to perform snapshot tests on React components and to test Redux actions and reducers.
+I build a simple shopping list, using React and Redux.
+Axios and TheMealDB's API are utilized to fetch meal suggestions for main ingredient from the shopping list.
+Jest is used to test my services, as well as Redux actions and reducers.
+Furthermore Jest performs snapshot tests on React components.
 
-Of course there are several similar projects all over the place, but I simply want to practise.
+Of course there are several similar projects all over the place, but I just want to practice.
 The project should not be seen as a prototype etc.!
 
 ---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
 ## Features
 
-- add, delete and update entries
+- add, update and delete entries
+  - the shopping list's last entry acts as input field for new entries
+  - edit mode can be used to alter entries' contents
+  - edit mode can be used to delete single entries (both hitting the remove-button or clearing the textfield are possible to do so)
 - entries have status "open" or "done", shown by different styles
-- info-box below shows counters for all entries and done entries
+  - simply click on an entry in display mode to toggle its status
+- info-box below shows counters for existing and done entries
+- meal-suggestion-box shows up to ten meals, which fit to entries from the shopping list
+  - the list updates on every added or updated (i.e. submitted) entry
+  - TheMealDB's API is used to offer suggestions for main ingredients from the shopping list
+  - simply click on the external hyperlinks to get more information on the shown dishes (information, photos and recipes are provided by TheMealDB)
 
 ## Available Scripts
 

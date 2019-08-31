@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests for MealSuggestion component should render MealSuggestion component Spaghetti Bolognese correctly 1`] = `
+<li>
+  <a
+    href="https://www.themealdb.com/meal.php?c=42"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Spaghetti Bolognese
+  </a>
+</li>
+`;

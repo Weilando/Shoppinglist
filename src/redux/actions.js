@@ -1,4 +1,4 @@
-import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from './actionTypes';
+import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS, UPDATE_MEAL_SUGGESTIONS } from './actionTypes';
 
 let nextEntryId = 0;
 
@@ -33,5 +33,12 @@ export function toggleStatus(id) {
   return {
     type: TOGGLE_STATUS,
     payload: { id: id }
+  }
+}
+
+export function updateMealSuggestions(mealSuggestions) {
+  return {
+    type: UPDATE_MEAL_SUGGESTIONS,
+    payload: { newMealSuggestions: mealSuggestions }
   }
 }

@@ -5,7 +5,7 @@ const initialState = {
   entryList: [],
 };
 
-export default function(state = initialState, action) {
+export function generalReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_ENTRY: {
       const { id, newContent } = action.payload;
@@ -37,7 +37,7 @@ export default function(state = initialState, action) {
     }
     case DELETE_ENTRY: {
       const { id } = action.payload;
-      
+
       return Object.assign({}, state, {
         entryList: [...state.entryList.filter(entry => entry.id !== id)],
       });

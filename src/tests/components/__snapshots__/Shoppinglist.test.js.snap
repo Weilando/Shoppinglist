@@ -50,5 +50,15 @@ exports[`snapshot tests for Shoppinglist component should render empty Shoppingl
       0
     </p>
   </div>
+  <div
+    className="InfoBox"
+  >
+    <h3>
+      Meal suggestions:
+    </h3>
+    <ul
+      className="Shoppinglist"
+    />
+  </div>
 </div>
 `;
