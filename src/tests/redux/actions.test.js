@@ -1,7 +1,7 @@
 import * as actions from '../../redux/actions.js';
 import * as types from '../../redux/actionTypes';
 
-describe('actions', () => {
+describe('actions for generalReducer', () => {
   it('should create an action to add an entry', () => {
     const newContent = 'This is a new entry';
 
@@ -51,5 +51,24 @@ describe('actions', () => {
     };
 
     expect(actions.toggleStatus(toggleId)).toEqual(expectedAction);
+  })
+});
+
+describe('actions for mealSuggestionsReducer', () => {
+  it('should create an action to update mealSuggestions', () => {
+    const fetchedMealSuggestions = [
+      {
+        "strMeal": "Chicken Couscous",
+        "strMealThumb": "https://www.themealdb.com/images/media/meals/qxytrx1511304021.jpg",
+        "idMeal": "52850"
+      }
+    ];
+
+    const expectedAction = {
+      type: types.UPDATE_MEAL_SUGGESTIONS,
+      payload: { newMealSuggestions: fetchedMealSuggestions }
+    };
+
+    expect(actions.updateMealSuggestions(fetchedMealSuggestions)).toEqual(expectedAction);
   })
 });

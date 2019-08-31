@@ -22,6 +22,5 @@ export async function getMealSuggestionsFor(mainIngredient) {
 
 export async function addMealSuggestionsFor(mainIngredient) {
   const mealSuggestions = await getMealSuggestionsFor(mainIngredient);
-  console.log(mealSuggestions);
-  store.dispatch(updateMealSuggestions({newMealSuggestions : mealSuggestions}));
+  store.dispatch(updateMealSuggestions(mealSuggestions));
 }

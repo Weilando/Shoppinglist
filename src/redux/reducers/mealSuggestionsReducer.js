@@ -4,10 +4,9 @@ const initialState = {
   mealSuggestionList: [],
 };
 
-export async function mealSuggestionsReducer(state = initialState, action) {
+export function mealSuggestionsReducer(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_MEAL_SUGGESTIONS:
-    default: {
+    case UPDATE_MEAL_SUGGESTIONS: {
       const { newMealSuggestions } = action.payload;
 
       return {
@@ -15,5 +14,7 @@ export async function mealSuggestionsReducer(state = initialState, action) {
         mealSuggestionList: newMealSuggestions.concat(state.mealSuggestionList)
       };
     }
+    default:
+      return state;
   }
 }
