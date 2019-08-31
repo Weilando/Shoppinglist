@@ -1,5 +1,5 @@
 import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, TOGGLE_STATUS } from '../actionTypes';
-import { EntryStatus } from '../../enums/entry';
+import { EntryStatus } from '../../constants/entry';
 
 const initialState = {
   entryList: [],

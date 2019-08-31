@@ -6,7 +6,7 @@ import NewEntry from './NewEntry';
 import InfoBox from './InfoBox';
 import MealSuggestionsBox from './MealSuggestionsBox';
 import ModeForm from './ModeForm';
-import { EntryMode, EntryStatus } from '../enums/entry';
+import { EntryMode, EntryStatus } from '../constants/entry';
 
 class Shoppinglist extends React.Component {
   constructor(props) {

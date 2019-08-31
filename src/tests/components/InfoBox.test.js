@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import store from '../../redux/store';
+import store from '../../store/store';
 import InfoBox from '../../components/InfoBox';
 
 describe('snapshot tests for InfoBox component', () => {
