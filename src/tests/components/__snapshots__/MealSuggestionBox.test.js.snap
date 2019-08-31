@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests for MealSuggestionsBox component should render empty MealSuggestionsBox component correctly 1`] = `
+<div
+  className="InfoBox"
+>
+  <h3>
+    Meal suggestions:
+  </h3>
+  <ul
+    className="Shoppinglist"
+  />
+</div>
+`;
