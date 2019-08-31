@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteEntry, updateEntry, toggleStatus } from '../redux/actions';
+import { addMealSuggestionsFor } from '../axios/MealService';
 import { EntryMode, EntryStatus } from '../enums/entry';
 
 class Entry extends React.Component {
@@ -38,9 +39,11 @@ class Entry extends React.Component {
 
     if(this.props.eContent === '') {
       this.props.deleteEntry(this.props.eId);
+      return;
     }
 
     this.props.updateEntry(this.props.eId, this.props.eContent);
+    addMealSuggestionsFor(this.props.eContent);
   }
 
   render() {
