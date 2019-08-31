@@ -8,10 +8,11 @@ export function mealSuggestionsReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_MEAL_SUGGESTIONS: {
       const { newMealSuggestions } = action.payload;
+      const newMealSuggestionList = newMealSuggestions.concat(state.mealSuggestionList);
 
       return {
         ...state,
-        mealSuggestionList: newMealSuggestions.concat(state.mealSuggestionList)
+        mealSuggestionList: newMealSuggestionList.slice(0,10)
       };
     }
     default:
