@@ -3,6 +3,7 @@ import { FILTER } from './urlConstants';
 import store from '../redux/store';
 import { updateMealSuggestions } from '../redux/actions';
 
+// helper function is exported for tests
 export async function getMealSuggestionsFor(mainIngredient) {
   try {
     const { data } = await MealAPI.get(FILTER, {params: {i: mainIngredient}})
@@ -21,6 +22,11 @@ export async function getMealSuggestionsFor(mainIngredient) {
 }
 
 export async function addMealSuggestionsFor(mainIngredient) {
-  const mealSuggestions = await getMealSuggestionsFor(mainIngredient);
+  const mealSuggestions = await getMealSuggestionsFor(formatName(mainIngredient));
   store.dispatch(updateMealSuggestions(mealSuggestions));
+}
+
+// helper function is exported for tests
+export function formatName(name) {
+  return name.toLowerCase().replace(new RegExp(' ', 'g'), '_');
 }

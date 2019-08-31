@@ -1,5 +1,5 @@
 import mockAxios from 'axios';
-import { getMealSuggestionsFor } from "../../axios/MealService";
+import { getMealSuggestionsFor, formatName } from "../../axios/MealService";
 import { FILTER } from '../../axios/urlConstants';
 
 const spaghettiResponse = {
@@ -19,8 +19,7 @@ const spaghettiResponse = {
   }
 };
 
-describe("meal service", () => {
-
+describe("MealService fetch", () => {
   beforeEach(() => {
     mockAxios.get.mockClear();
   });
@@ -44,4 +43,18 @@ describe("meal service", () => {
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(FILTER, {params: {i: 'spaghetti'}});
   });
+});
+
+describe('MealService formatName', () => {
+  it('should replace whitespace by underscore', () => {
+    expect(formatName(' asdf 42 ')).toBe('_asdf_42_');
+  })
+
+  it('should transform name to lowercase', () => {
+    expect(formatName('aSDf')).toBe('asdf');
+  })
+
+  it('should transform name to lowercase and replace whitespace by underscore', () => {
+    expect(formatName(' aSDf 42 ')).toBe('_asdf_42_');
+  })
 });
