@@ -5,8 +5,8 @@ import * as types from '../../redux/actionTypes';
 import { EntryStatus } from '../../enums/entry';
 
 describe('generalReducer', () => {
-  let initialState = { entryList: [] };
-  let oneEntryState = {
+  const initialState = { entryList: [] };
+  const oneEntryState = {
     entryList: [
       {
         id: 1,
@@ -180,22 +180,21 @@ describe('generalReducer', () => {
 });
 
 describe('mealSuggestionsReducer', () => {
-  let initialState = { mealSuggestionList: [] };
-  let oneEntryState = {
-    mealSuggestionList: [
-      {
-        "strMeal": "Chicken Couscous",
-        "strMealThumb": "https://www.themealdb.com/images/media/meals/qxytrx1511304021.jpg",
-        "idMeal": "52850"
-      }
-    ]
+  const initialState = { mealSuggestionList: [] };
+  const chickenSuggestion = {
+    "strMeal": "Chicken Couscous",
+    "strMealThumb": "https://www.themealdb.com/images/media/meals/qxytrx1511304021.jpg",
+    "idMeal": "52850"
+  };
+  const oneEntryState = {
+    mealSuggestionList: [ chickenSuggestion ]
   };
 
   it('should return the initial state', () => {
     expect(mealSuggestionsReducer(undefined, [])).toEqual(initialState);
   });
 
-  it('should add new meal suggestions to empty state', () => {
+  it('should add a new meal suggestion to empty state', () => {
     expect(mealSuggestionsReducer(initialState, actions.updateMealSuggestions(
       [
         {
@@ -205,5 +204,23 @@ describe('mealSuggestionsReducer', () => {
         }
       ]
     ))).toEqual(oneEntryState);
+  });
+
+  it('should add two new meal suggetions in front of existing suggestions', () => {
+    const spaghettiList = [
+      {
+        "strMeal": "Pilchard puttanesca",
+        "strMealThumb": "https://www.themealdb.com/images/media/meals/vvtvtr1511180578.jpg",
+        "idMeal": "52837"
+      },
+      {
+        "strMeal": "Spaghetti Bolognese",
+        "strMealThumb": "https://www.themealdb.com/images/media/meals/sutysw1468247559.jpg",
+        "idMeal": "52770"
+      }
+    ];
+
+    expect(mealSuggestionsReducer(oneEntryState, actions.updateMealSuggestions(spaghettiList)))
+    .toEqual({ mealSuggestionList: [...spaghettiList].concat(chickenSuggestion) });
   });
 });
