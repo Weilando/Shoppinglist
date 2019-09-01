@@ -1,4 +1,4 @@
-import { UPDATE_MEAL_SUGGESTIONS } from '../actionTypes';
+import { UPDATE_MEAL_SUGGESTIONS, REMOVE_DUPLICATES } from '../actionTypes';
 
 const initialState = {
   mealSuggestionList: [],
@@ -14,6 +14,13 @@ export function mealSuggestionsReducer(state = initialState, action) {
         ...state,
         mealSuggestionList: newMealSuggestionList.slice(0,10)
       };
+    }
+    case REMOVE_DUPLICATES: {
+      const mealSuggestionList = state.mealSuggestionList;
+      return {
+        ...state,
+        mealSuggestionList: [...new Set(mealSuggestionList)]
+      }
     }
     default:
       return state;

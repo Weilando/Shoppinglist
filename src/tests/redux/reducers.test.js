@@ -209,7 +209,7 @@ describe('mealSuggestionsReducer', () => {
   it('should add a new meal suggestion to empty state', () => {
     expect(mealSuggestionsReducer(initialState,
       actions.updateMealSuggestions([chickenSuggestion])))
-    .toEqual(oneEntryState);
+      .toEqual(oneEntryState);
   });
 
   it('should add two new meal suggetions in front of existing suggestions', () => {
@@ -219,23 +219,43 @@ describe('mealSuggestionsReducer', () => {
   });
 
   it('should add a new meal suggetion on front of existing suggestions and limit the amount to ten', () => {
-    const result = mealSuggestionsReducer({
+    const currentState = {
       mealSuggestionList: spaghettiList
         .concat(spaghettiList)
         .concat(spaghettiList)
         .concat(spaghettiList)
         .concat(spaghettiList)
-    }, actions.updateMealSuggestions([chickenSuggestion]));
-
-    expect(result.mealSuggestionList.length).toEqual(10);
-    expect(result)
-    .toEqual({ mealSuggestionList: [
+    };
+    const expectedResult = { mealSuggestionList: [
       chickenSuggestion,
       ...spaghettiList,
       ...spaghettiList,
       ...spaghettiList,
       ...spaghettiList,
       spaghettiList[0]
-    ]});
+    ]};
+
+    const result = mealSuggestionsReducer(currentState, actions.updateMealSuggestions([chickenSuggestion]));
+
+    expect(result.mealSuggestionList.length).toEqual(10);
+    expect(result).toEqual(expectedResult);
+  });
+
+  it('should return initial state after removing duplicates from initial state', () => {
+    expect(mealSuggestionsReducer(initialState, actions.removeDuplicates()))
+      .toEqual(initialState);
+  });
+
+  it('should remove no duplicates from list with single entry', () => {
+    expect(mealSuggestionsReducer(oneEntryState, actions.removeDuplicates()))
+      .toEqual(oneEntryState);
+  });
+
+  it('should remove duplicates', () => {
+    const currentState = { mealSuggestionList: spaghettiList.concat(spaghettiList) };
+    const expectedResult = { mealSuggestionList: spaghettiList };
+
+    expect(mealSuggestionsReducer(currentState, actions.removeDuplicates()))
+      .toEqual(expectedResult);
   });
 });
