@@ -14,5 +14,5 @@ describe('snapshot tests for Shoppinglist component', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-  })
+  });
 });

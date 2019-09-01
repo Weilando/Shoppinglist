@@ -22,7 +22,7 @@ describe('snapshot tests for Entry component', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-  })
+  });
 
   it('should render Entry component with DONE status and EDIT mode correctly', () => {
     const toggleFunction = jest.fn();
@@ -39,5 +39,5 @@ describe('snapshot tests for Entry component', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-  })
+  });
 });

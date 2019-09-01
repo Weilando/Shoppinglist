@@ -18,5 +18,5 @@ describe('snapshot tests for InfoBox component', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-  })
+  });
 });

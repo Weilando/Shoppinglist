@@ -30,7 +30,7 @@ describe("MealService fetch", () => {
     expect(result).toEqual([]);
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(FILTER, {params: {i: 'stone'}});
-  })
+  });
 
   it("request meals for main ingredient 'spaghetti' should return two meals", async () => {
     mockAxios.get.mockImplementationOnce(() =>
@@ -48,13 +48,13 @@ describe("MealService fetch", () => {
 describe('MealService formatName', () => {
   it('should replace whitespace by underscore', () => {
     expect(formatName(' asdf 42 ')).toBe('_asdf_42_');
-  })
+  });
 
   it('should transform name to lowercase', () => {
     expect(formatName('aSDf')).toBe('asdf');
-  })
+  });
 
   it('should transform name to lowercase and replace whitespace by underscore', () => {
     expect(formatName(' aSDf 42 ')).toBe('_asdf_42_');
-  })
+  });
 });

@@ -19,7 +19,7 @@ describe('snapshot tests for ModeForm component', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-  })
+  });
 
   it('should render ModeForm component with mode EDIT correctly', () => {
     const toggleFunction = jest.fn();
@@ -33,5 +33,5 @@ describe('snapshot tests for ModeForm component', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-  })
+  });
 });

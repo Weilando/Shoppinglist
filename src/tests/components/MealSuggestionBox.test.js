@@ -14,5 +14,5 @@ describe('snapshot tests for MealSuggestionsBox component', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-  })
+  });
 });

@@ -14,7 +14,7 @@ describe('actions for generalReducer', () => {
     };
 
     expect(actions.addEntry(newContent)).toEqual(expectedAction);
-  })
+  });
 
   it('should create an action to update an entry', () => {
     const updateId = 42;
@@ -29,7 +29,7 @@ describe('actions for generalReducer', () => {
     };
 
     expect(actions.updateEntry(updateId, updateContent)).toEqual(expectedAction);
-  })
+  });
 
   it('should create an action to delete an entry', () => {
     const deleteId = 2;
@@ -40,7 +40,7 @@ describe('actions for generalReducer', () => {
     };
 
     expect(actions.deleteEntry(deleteId)).toEqual(expectedAction);
-  })
+  });
 
   it('should create an action to toggle the status for specific entry', () => {
     const toggleId = 7;
@@ -51,7 +51,7 @@ describe('actions for generalReducer', () => {
     };
 
     expect(actions.toggleStatus(toggleId)).toEqual(expectedAction);
-  })
+  });
 });
 
 describe('actions for mealSuggestionsReducer', () => {
@@ -69,6 +69,12 @@ describe('actions for mealSuggestionsReducer', () => {
       payload: { newMealSuggestions: fetchedMealSuggestions }
     };
 
-    expect(actions.updateMealSuggestions(fetchedMealSuggestions)).toEqual(expectedAction);
-  })
+    expect(actions.updateMealSuggestions(fetchedMealSuggestions))
+      .toEqual(expectedAction);
+  });
+
+  it('should create an action to delete duplicates', () => {
+    expect(actions.removeDuplicates())
+      .toEqual({ type: types.REMOVE_DUPLICATES });
+  });
 });

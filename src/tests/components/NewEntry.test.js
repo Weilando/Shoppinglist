@@ -14,5 +14,5 @@ describe('snapshot tests for NewEntry component', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-  })
+  });
 });
